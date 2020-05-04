@@ -1,0 +1,262 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  overflow-x: hidden ;
+}
+.App {
+    margin: 2rem;
+    text-align: center;
+    min-height: 100vh;
+  }
+  h1 {
+    color: #07F;
+  }
+  .drag-drop-zone {
+    padding: 2rem;
+    text-align: center;
+    background: #07F;
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 10px #C0C0C0;
+  }
+  .drag-drop-zone p {
+    color: #FFF;
+  }
+  .drag-drop-zone.inside-drag-area {
+    opacity: 0.7;
+  }
+  .dropped-files li {
+    color: #07F;
+    padding: 3px;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .submitBtn{
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 0.5rem;
+    height: 30px;
+    color: white;
+    background: #07f;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px #C0C0C0;
+  }
+  .progress{
+    display: block;
+    height: 15px;
+    /* width: 100%; */
+    background: #eee;
+    border-radius: 0.5rem;
+    margin-bottom: 20px;
+
+  }
+  progress {
+    border-radius: 0.5rem; 
+    width: 100%;
+    height: 17px;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  progress::-webkit-progress-bar {
+   background-color: #eee;
+    border-radius: 0.5rem;
+    color:blue
+  }
+  progress::-webkit-progress-value {
+     border-radius: 0.5rem; 
+     background-color: #07f;
+     text-align: center;
+     color:white;
+  }
+  progress::-moz-progress-bar {
+    /* style rules */
+  }
+  .alert{
+    color:white;
+    position: absolute;
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+  .column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 180px;
+  }
+  .row{
+    width:100%;
+    margin-top:20px;
+  }
+  /* Style the images inside the grid */
+  .column img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .column img:hover {
+    opacity: 1;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  img {
+    max-height: 160px;
+    max-width: 100%;
+    border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+}
+
+.myImages {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.myImages:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 75px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  overflow-y: hidden;
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  height: auto !important;
+  max-height: max-content;
+
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+.modal-content img{
+  transition: all 1s ease-in-out;
+}
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+  background: transparent;
+  border:none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.prev {
+  left: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.column img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+.row-section{
+  margin-top: 30px;
+}
+.groupHeader{
+  color: #666;
+    font-family: sans-serif;
+    font-size: small;
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 780px){
+  .modal-content {
+    width: 100%;
+  }
+  .column {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 550px){
+  .modal-content {
+    width: 100%;
+  }
+  .column {
+    width: 100%;
+  }
+}
