@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 const Photo = require("./Photo");
 router = express.Router();
 var photos = mongoose.model('Photos');
-
+const mv = require('mv');
 
 router.post('/upload', (req, res) => {
 
@@ -17,8 +17,8 @@ router.post('/upload', (req, res) => {
             next(err);
             return;
         }
-        if (files == undefined) {
-            return res.status(400).json({ msg: 'No file uploaded' });
+        if (files === undefined) {
+            return res.status(400).json({ msg: 'No file Selected' });
 
         } else {
 
@@ -26,13 +26,15 @@ router.post('/upload', (req, res) => {
                  files.arrayOfFilesName.map(async file => {
                     var oldpath = file.path;
                     var newpath = `${__dirname}/../client/public/uploads/original/${file.name}`;
-
-                    fileRename(oldpath, newpath);
+                    
                     const photo = new Photo({
                         fileName: file.name
                     });
+                    fileRename(oldpath, newpath);
+                    
                     photo.save(function(error){
                         if(error){ 
+                            return res.status(400).json({ msg: 'Failed' });
                           throw error;
                         } 
                         //res.redirect('/?msg=1');
@@ -54,13 +56,16 @@ router.post('/upload', (req, res) => {
                 var newpath = `${__dirname}/../client/public/uploads/original/${files.arrayOfFilesName.name}`;
                 var newpath720 = `${__dirname}/../client/public/uploads/image720/${files.arrayOfFilesName.name}`;
                 var newpath240 = `${__dirname}/../client/public/uploads/image240/${files.arrayOfFilesName.name}`;
-                fileRename(oldpath, newpath);
-                
+               
                 const photo = new Photo({
                     fileName: files.arrayOfFilesName.name
                 });
+                fileRename(oldpath, newpath);
+                
+                
                 photo.save(function(error){
                     if(error){ 
+                        return res.status(400).json({ msg: 'Failed' });
                       throw error;
                     } 
                     //res.redirect('/?msg=1');
@@ -111,6 +116,7 @@ const imageRendition = (path, type, quality, writepath) => {
 
     }).catch(err => {
         console.error(err);
+        return res.status(400).json({ msg: 'Failed' });
     });
 }
  function fileRename(oldpath, newpath) {
@@ -119,8 +125,10 @@ const imageRendition = (path, type, quality, writepath) => {
     } catch (err) {
 
     } finally {
-        const s =  fs.rename(oldpath, newpath, function (err) {
-            if (err) throw err;
+        const s =  mv(oldpath, newpath, function (err) {
+            if (err) {
+                return res.status(400).json({ msg: 'Failed' });
+            };
         });
     }
 

@@ -4,13 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm install && node server.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-},
-
-"engines": {
-  "node": "13.7.0"
-},
+  },
+  "engines": {
+    "node": "13.7.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,6 +22,7 @@
     "lodash.groupby": "^4.6.0",
     "moment": "^2.25.1",
     "mongoose": "^5.9.11",
+    "mv": "^2.1.1",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
