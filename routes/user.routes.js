@@ -9,16 +9,18 @@ var photos = mongoose.model('Photos');
 const mv = require('mv');
 
 router.post('/upload', (req, res) => {
-
-    console.log('upload api');
     const form = formidable({ multiples: true });
     form.parse(req, (err, fields, files) => {
         if (err) {
             next(err);
             return;
         }
-        if (files === undefined) {
-            return res.status(400).json({ msg: 'No file Selected' });
+        if (files === undefined || Object.keys(files).length===0) {
+            
+            if (err) {
+                next(err);
+                return;
+            }
 
         } else {
 
@@ -79,7 +81,6 @@ router.post('/upload', (req, res) => {
             }
 
         }
-        console.log('Uploaded');
         return res.status(200).json({ msg: 'File uploaded' });
     });
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './app2.css';
 import axios from 'axios';
 import DragAndDrop from './components/DragAndDrop';
@@ -20,7 +20,7 @@ function App() {
     }
   };
   const [message, setMessage] = useState('');
-  const [uploadPercentage, setUploadPercentage] = useState(10);
+  const [uploadPercentage, setUploadPercentage] = useState(0);
   const fileInput = React.createRef();
   const [ress, setRess] = useState({});
   const fileHandler = event => {
@@ -35,8 +35,17 @@ function App() {
     setMessage('');
     setUploadPercentage(0);
   }
+
+
   const uploadHandler = async event => {
     event.preventDefault();
+    if([...data.fileList].length===0){
+      setMessage('Please Select files')
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
+      return
+    }
     const formData = new FormData();
     [...data.fileList].forEach(img => {
       formData.append("arrayOfFilesName", img)
@@ -67,8 +76,16 @@ function App() {
         
       }
     })
-    setMessage('File Uploaded');
-    setRess(res.data);
+    console.log(res.status);
+    if (res.status===200){
+     
+      console.log(res);
+      setMessage('File Uploaded');
+      setRess(res.data);
+    }else{ 
+      console.log('erro in')
+    }
+    
   }
   const handleDrop = e => {
     e.preventDefault();
