@@ -62,7 +62,10 @@ dates.forEach(element => {
 
 
  
-
+"scripts": {
+    "start": "npm install && node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
 "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",

@@ -23,7 +23,9 @@ router.post('/upload', (req, res) => {
         } else {
 
             if (Array.isArray(files.arrayOfFilesName)) {
-                 files.arrayOfFilesName.map(async file => {
+                 
+                const myPromise = new Promise(()=>{
+                    files.arrayOfFilesName.map(async file => {
                     var oldpath = file.path;
                     var newpath = `${__dirname}/../client/public/uploads/original/${file.name}`;
                     
@@ -40,7 +42,7 @@ router.post('/upload', (req, res) => {
                         //res.redirect('/?msg=1');
                      });
 
-                });
+                })}).then(
                 files.arrayOfFilesName.map(async file => {
                     var newpath = `${__dirname}/../client/public/uploads/original/${file.name}`;
                     var newpath720 = `${__dirname}/../client/public/uploads/image720/${file.name}`;
@@ -49,7 +51,7 @@ router.post('/upload', (req, res) => {
                     imageRendition(newpath, 720, 100, newpath720);
                     imageRendition(newpath, 240, 100, newpath240);
 
-                });
+                }));
             }
             else {
                 var oldpath = files.arrayOfFilesName.path;
