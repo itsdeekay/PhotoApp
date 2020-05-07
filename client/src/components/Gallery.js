@@ -103,13 +103,13 @@ useEffect(()=>{
           return(
             <div className="row-section">
               <div className="groupHeader">{element}</div>
-              <hr/>
+   
               <div className="row">
               {groupImages[element].map(f => {
     return (
 
       <div className="column">
-        <img value={f.id} alt={f.file.fileName} src={'/uploads/image720/' + f.file.fileName} onClick={() => {
+        <img key={f.id} alt={f.file.fileName} src={'/uploads/image240/' + f.file.fileName} onClick={() => {
           setActiveImage(f.file.fileName);
           setActiveId(f.id);
         }} className="myImages" />

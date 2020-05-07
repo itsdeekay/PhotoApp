@@ -3,6 +3,7 @@
 }
 body{
   overflow-x: hidden ;
+  background-color: #333;
 }
 .App {
     margin: 2rem;
@@ -15,9 +16,13 @@ body{
   .drag-drop-zone {
     padding: 2rem;
     text-align: center;
-    background: #07F;
+    background: #d82d66;
     border-radius: 0.5rem;
-    box-shadow: 5px 5px 10px #C0C0C0;
+    box-shadow: 2px 2px 5px #111;
+    cursor: pointer;
+  }
+  .drag-drop-zone:hover {
+    background-color: #c20f62;
   }
   .drag-drop-zone p {
     color: #FFF;
@@ -25,12 +30,7 @@ body{
   .drag-drop-zone.inside-drag-area {
     opacity: 0.7;
   }
-  .dropped-files li {
-    color: #07F;
-    padding: 3px;
-    text-align: left;
-    font-weight: bold;
-  }
+  
   
   .submitBtn{
     display: block;
@@ -39,11 +39,14 @@ body{
     border-radius: 0.5rem;
     height: 30px;
     color: white;
-    background: #07f;
+    background: #d82d66;
     outline: none;
     border: none;
     cursor: pointer;
-    box-shadow: 5px 5px 10px #C0C0C0;
+    box-shadow: 2px 2px 5px #111;
+  }
+  .submitBtn:hover{
+    background-color: #c20f62;
   }
   .progress{
     display: block;
@@ -67,17 +70,15 @@ body{
   progress::-webkit-progress-bar {
    background-color: #eee;
     border-radius: 0.5rem;
-    color:blue
+    color:#d82d66;
   }
   progress::-webkit-progress-value {
      border-radius: 0.5rem; 
-     background-color: #07f;
+     background-color:#d82d66;
      text-align: center;
      color:white;
   }
-  progress::-moz-progress-bar {
-    /* style rules */
-  }
+
   .alert{
     color:white;
     position: absolute;
@@ -232,15 +233,28 @@ body{
   background-color: rgba(0, 0, 0, 0.8);
 }
 .column img:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  box-shadow: 0 0 5px 1px #d82d66;;
 }
 .row-section{
   margin-top: 30px;
 }
 .groupHeader{
-  color: #666;
+  color: #fff;
     font-family: sans-serif;
     font-size: small;
+    border-bottom: 2px solid #d82d66;
+    padding: 10px;
+}
+
+#warning{
+  font-size: 13px;
+    font-family: sans-serif;
+    color: #d82d66;;
+    /* margin-top: 12px; */
+    padding-top: 12px;
+    height: 12px;
+    display: block;
+    text-align: left;
 }
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 780px){
