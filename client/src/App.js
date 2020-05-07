@@ -44,7 +44,7 @@ function App() {
   };
 
   const fileHandler = async event => {
-
+    data.fileList = []
     let files = [...event.target.files];
 
     if (files && files.length > 0) {
@@ -79,6 +79,7 @@ function App() {
 
   const uploadHandler = async event => {
     event.preventDefault();
+    setWarning('');
     if([...data.fileList].length===0){
       setWarning('Please Select files')
       setTimeout(() => {
