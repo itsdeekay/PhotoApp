@@ -66,11 +66,10 @@ router.post('/upload', (req, res) => {
                     fileName: files.arrayOfFilesName.name
                 });
                
-                    const filem = async () =>{
-                         await fileRename(oldpath, newpath);
-                         
-                    } 
-                     filem();
+                new Promise((resolve,reject)=>{
+                    fileRename(oldpath, newpath);
+                    resolve(true)
+                }).then(()=>{
                     photo.save(function(error){
                         if(error){ 
                             return res.status(400).json({ msg: 'Failed' });
@@ -80,6 +79,9 @@ router.post('/upload', (req, res) => {
                      });
                     imageRendition(newpath, 720, 100, newpath720);
                 imageRendition(newpath, 240, 100, newpath240);
+                })
+                    
+                  
             
                 
 
