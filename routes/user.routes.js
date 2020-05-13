@@ -66,10 +66,12 @@ router.post('/upload', (req, res) => {
                     fileName: files.arrayOfFilesName.name
                 });
                
-                new Promise((resolve,reject)=>{
-                    fileRename(oldpath, newpath);
-                    resolve(true)
+                new Promise( (resolve,reject)=>{
+                   
+                    resolve( fileRename(oldpath, newpath))
                 }).then(()=>{
+
+                    console.log('IN');
                     photo.save(function(error){
                         if(error){ 
                             return res.status(400).json({ msg: 'Failed' });
@@ -77,8 +79,15 @@ router.post('/upload', (req, res) => {
                         } 
                         //res.redirect('/?msg=1');
                      });
-                    imageRendition(newpath, 720, 100, newpath720);
-                imageRendition(newpath, 240, 100, newpath240);
+                     setTimeout(() => {
+                        imageRendition(newpath, 720, 100, newpath720);
+                     }, 100);
+                     setTimeout(() => {
+                        imageRendition(newpath, 240, 100, newpath240);
+                     }, 100);
+                    
+                //     imageRendition(newpath, 720, 100, newpath720);
+                // imageRendition(newpath, 240, 100, newpath240);
                 })
                     
                   
@@ -104,8 +113,18 @@ router.get('/images',paginatedResults(photos),(req,res) => {
 //    });
 });
 
+const tryRequire = (path) => {
+    try {
+     return require(`${path}`);
+    } catch (err) {
+     return null;
+    }
+  };
+
 const imageRendition = (path, type, quality, writepath) => {
+    console.log('Rendition 1');
     Jimp.read(path).then(file => {
+        console.log('Rendition 2');
         var w = file.bitmap.width;
         var h = file.bitmap.height;
         if (w > h) {
