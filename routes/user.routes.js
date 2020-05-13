@@ -65,19 +65,23 @@ router.post('/upload', (req, res) => {
                 const photo = new Photo({
                     fileName: files.arrayOfFilesName.name
                 });
-                fileRename(oldpath, newpath);
-                
-                
-                photo.save(function(error){
-                    if(error){ 
-                        return res.status(400).json({ msg: 'Failed' });
-                      throw error;
+               
+                    const filem = async () =>{
+                         await fileRename(oldpath, newpath);
+                         
                     } 
-                    //res.redirect('/?msg=1');
-                 });
-
-                imageRendition(newpath, 720, 100, newpath720);
+                     filem();
+                    photo.save(function(error){
+                        if(error){ 
+                            return res.status(400).json({ msg: 'Failed' });
+                          
+                        } 
+                        //res.redirect('/?msg=1');
+                     });
+                    imageRendition(newpath, 720, 100, newpath720);
                 imageRendition(newpath, 240, 100, newpath240);
+            
+                
 
             }
 
@@ -132,7 +136,9 @@ const imageRendition = (path, type, quality, writepath) => {
         const s =  mv(oldpath, newpath, function (err) {
             if (err) {
                 return res.status(400).json({ msg: 'Failed' });
-            };
+            } else{
+                console.log('file moved')
+            }
         });
     }
 
