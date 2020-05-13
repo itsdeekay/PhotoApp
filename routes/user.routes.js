@@ -51,8 +51,12 @@ router.post('/upload', (req, res) => {
                     var newpath720 = `${__dirname}/../client/public/uploads/image720/${file.name}`;
                     var newpath240 = `${__dirname}/../client/public/uploads/image240/${file.name}`;
 
-                    imageRendition(newpath, 720, 100, newpath720);
-                    imageRendition(newpath, 240, 100, newpath240);
+                    setTimeout(() => {
+                        imageRendition(newpath, 720, 100, newpath720);
+                     }, 100);
+                     setTimeout(() => {
+                        imageRendition(newpath, 240, 100, newpath240);
+                     }, 100);
 
                 }));
             }
